@@ -1,0 +1,11 @@
+@import "./font";
+@import "./variable";
+@import "./mixin";
+
+body {
+        font-family: vazir;
+}
+
+main, aside {
+        height: calc(100vh - 200px);
+}
