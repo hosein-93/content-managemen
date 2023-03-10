@@ -50,6 +50,44 @@
   margin: 0;
 }
 
+.accordion .accordion-item {
+  box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.2) !important;
+}
+.accordion .accordion-button {
+  font-weight: 500;
+  cursor: pointer;
+  border: unset;
+  box-shadow: unset;
+  transition: all 0.5s ease-in-out;
+}
+.accordion .accordion-button:not(.collapsed) {
+  background-color: var(--bs-secondary);
+  color: var(--bs-light);
+}
+.accordion .accordion-button:not(.collapsed):hover {
+  color: var(--bs-light);
+}
+.accordion .accordion-button:hover {
+  color: var(--bs-dark);
+}
+.accordion .accordion-button::after {
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  border-radius: 50%;
+  background-size: 15px;
+  background-position: center;
+  background-color: var(--bs-white);
+  box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.2) !important;
+}
+.accordion .accordion-body span {
+  font-weight: 500;
+}
+.accordion .accordion-body span > i {
+  font-size: 1.2rem;
+  vertical-align: middle;
+}
+
 body {
   font-family: vazir;
 }
@@ -97,9 +135,6 @@ input[type=checkbox] + label {
   font-size: 0.85rem;
   font-weight: 500;
 }
-input[type=checkbox] ~ div > a {
-  cursor: pointer;
-}
 
 input, select {
   display: inline-block;
@@ -136,11 +171,45 @@ select {
   padding: var(---input-padding) !important;
 }
 
+textarea {
+  display: block;
+  width: 100%;
+  background-color: var(--bs-light);
+  padding: 1rem !important;
+  margin: var(--input-margin);
+  border: unset;
+  outline: unset;
+  border-radius: 0.5rem;
+  box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.2);
+  transition: all 0.5s ease-in-out;
+}
+textarea::-moz-placeholder {
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+textarea::placeholder {
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
 button {
+  width: -moz-max-content !important;
+  width: max-content !important;
   font-size: 0.75rem !important;
   font-weight: bold !important;
   padding: 0.5rem 1.5rem !important;
   box-shadow: unset !important;
+}
+
+a {
+  color: var(--bs-dark);
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+}
+a:hover {
+  color: var(--bs-dark);
 }
 
 .tagHide {
@@ -166,7 +235,8 @@ button {
 }
 
 .formShow {
-  height: 180px;
+  height: -moz-max-content;
+  height: max-content;
   transform: scale(1);
   padding: 1rem;
   margin: 1rem 0;
