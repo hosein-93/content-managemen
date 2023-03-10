@@ -20,7 +20,8 @@
         <link rel="stylesheet" href="./assets/css/bootstrap-icons.css">
         <link rel="stylesheet" href="./assets/css/fontawesome.all.min.css">
         <link rel="stylesheet" href="./assets/css/bootstrap.rtl.min.css">
-        <link rel="stylesheet" href="./assets/css/animate.v4.1.1.min.css">
+        <!-- <link rel="stylesheet" href="./assets/css/animate.v4.1.1.min.css"> -->
+        <link rel="stylesheet" href="./assets/css/sweetalert2.min.css">
         <link rel="stylesheet" href="./assets/css/style.css">
         <!-- <link rel="stylesheet" href="./assets/css"> -->
 </head>
@@ -30,28 +31,104 @@
         <section class="container-fluid">
                 <div class="container">
                         <div class="row">
-                                <div class="col-xx1-3 col-xl-3 col-lg-3 col-md-5 col-sm-6 col-xs-12 col-12">
-                                        <aside class="p-3">
-                                                <section class="container-fluid">
-                                                        <div class="container">
-                                                                <div class="row">
-                                                                        <div class="col-12">
-                                                                                <div class="d-flex justify-content-between align-items-center">
-                                                                                        <button></button>
+                                <div class="col-xx1-4 col-xl-4 col-lg-4 col-md-5 col-sm-6 col-xs-12 col-12">
+                                        <aside class="container">
+                                                <div class="row my-3">
+                                                        <div class="col-12 bg-dark d-flex justify-content-between align-items-center flex-wrap py-3 rounded-3">
+                                                                <button type="button" class="btn btn-secondary d-flex p-2" data-bs-toggle="searchCategory" aria-expanded="false" onclick="addSearchCategory(this)">
+                                                                        <i class="fa-solid fa-magnifying-glass"></i>
+                                                                </button>
+                                                                <button type="button" class="btn btn-secondary d-flex p-2" data-bs-toggle="addCategory" aria-expanded="false" onclick="addCategory(this)">
+                                                                        <i class="fa-solid fa-book"></i>
+                                                                </button>
+                                                        </div>
+
+                                                        <div class="col-12">
+                                                                <div class="list-group my-3" data-searchLive="category">
+                                                                        <div class="list-group-item form-check form-switch">
+                                                                                <input type="checkbox" name="category-1" class="form-check-input" id="category-1">
+                                                                                <label class="form-check-label" for="category-1">hosein</label>
+                                                                                <div class="float-end mx-2">
+                                                                                        <a class="d-inline-block text-warning me-2" data-category-edit="1" aria-expanded="false" onclick="editCategory(this);">
+                                                                                                <i class="fa-solid fa-pen-to-square"></i>
+                                                                                        </a>
+                                                                                        <a class="d-inline-block text-danger" data-category-delete="1" aria-expanded="false" onclick="deleteCategory(this);">
+                                                                                                <i class="fa-solid fa-trash"></i>
+                                                                                        </a>
+                                                                                </div>
+                                                                        </div>
+                                                                        <div class="list-group-item form-check form-switch">
+                                                                                <input type="checkbox" name="category-2" class="form-check-input" id="category-2">
+                                                                                <label class="form-check-label" for="category-2">mohammad</label>
+                                                                                <div class="float-end mx-2">
+                                                                                        <a class="d-inline-block text-warning me-2" data-category-edit="2" aria-expanded="false" onclick="editCategory(this);">
+                                                                                                <i class="fa-solid fa-pen-to-square"></i>
+                                                                                        </a>
+                                                                                        <a class="d-inline-block text-danger" data-category-delete="2" aria-expanded="false" onclick="deleteCategory(this);">
+                                                                                                <i class="fa-solid fa-trash"></i>
+                                                                                        </a>
+                                                                                </div>
+                                                                        </div>
+                                                                        <div class="list-group-item form-check form-switch">
+                                                                                <input type="checkbox" name="category-3" class="form-check-input" id="category-3">
+                                                                                <label class="form-check-label" for="category-3">ali</label>
+                                                                                <div class="float-end mx-2">
+                                                                                        <a class="d-inline-block text-warning me-2" data-category-edit="3" aria-expanded="false" onclick="editCategory(this);">
+                                                                                                <i class="fa-solid fa-pen-to-square"></i>
+                                                                                        </a>
+                                                                                        <a class="d-inline-block text-danger" data-category-delete="3" aria-expanded="false" onclick="deleteCategory(this);">
+                                                                                                <i class="fa-solid fa-trash"></i>
+                                                                                        </a>
+                                                                                </div>
+                                                                        </div>
+                                                                        <div class="list-group-item form-check form-switch">
+                                                                                <input type="checkbox" name="category-4" class="form-check-input" id="category-4">
+                                                                                <label class="form-check-label" for="category-4">125#$%</label>
+                                                                                <div class="float-end mx-2">
+                                                                                        <a class="d-inline-block text-warning me-2" data-category-edit="4" aria-expanded="false" onclick="editCategory(this);">
+                                                                                                <i class="fa-solid fa-pen-to-square"></i>
+                                                                                        </a>
+                                                                                        <a class="d-inline-block text-danger" data-category-delete="4" aria-expanded="false" onclick="deleteCategory(this);">
+                                                                                                <i class="fa-solid fa-trash"></i>
+                                                                                        </a>
+                                                                                </div>
+                                                                        </div>
+                                                                        <div class="list-group-item form-check form-switch">
+                                                                                <input type="checkbox" name="category-5" class="form-check-input" id="category-5">
+                                                                                <label class="form-check-label" for="category-5">hosein</label>
+                                                                                <div class="float-end mx-2">
+                                                                                        <a class="d-inline-block text-warning me-2" data-category-edit="5" aria-expanded="false" onclick="editCategory(this);">
+                                                                                                <i class="fa-solid fa-pen-to-square"></i>
+                                                                                        </a>
+                                                                                        <a class="d-inline-block text-danger" data-category-delete="5" aria-expanded="false" onclick="deleteCategory(this);">
+                                                                                                <i class="fa-solid fa-trash"></i>
+                                                                                        </a>
+                                                                                </div>
+                                                                        </div>
+                                                                        <div class="list-group-item form-check form-switch">
+                                                                                <input type="checkbox" name="category-6" class="form-check-input" id="category-6">
+                                                                                <label class="form-check-label" for="category-6">mohammad</label>
+                                                                                <div class="float-end mx-2">
+                                                                                        <a class="d-inline-block text-warning me-2" data-category-edit="6" aria-expanded="false" onclick="editCategory(this);">
+                                                                                                <i class="fa-solid fa-pen-to-square"></i>
+                                                                                        </a>
+                                                                                        <a class="d-inline-block text-danger" data-category-delete="6" aria-expanded="false" onclick="deleteCategory(this);">
+                                                                                                <i class="fa-solid fa-trash"></i>
+                                                                                        </a>
                                                                                 </div>
                                                                         </div>
                                                                 </div>
                                                         </div>
-                                                </section>
+                                                </div>
                                         </aside>
                                 </div>
-                                <div class="col-xx1-9 col-xl-9 col-lg-9 col-md-7 col-sm-6 col-xs-12 col-12">
+                                <div class="col-xx1-8 col-xl-8 col-lg-8 col-md-7 col-sm-6 col-xs-12 col-12">
                                         <main class="p-3">
                                                 <section class="container-fluid">
                                                         <div class="container">
                                                                 <div class="row">
                                                                         <div class="col-12">
-
+                                                                                
                                                                         </div>
                                                                 </div>
                                                         </div>
@@ -62,9 +139,10 @@
                 </div>
         </section>
         <footer class="bg-dark" style="height:100px;"></footer>
+        <script src="./assets/js/jquery-3.6.4.min.js"></script>
+        <script src="./assets/js/sweetalert2 v11.7.3.js"></script>
         <script src="./assets/js/popper.v2.9.2.min.js"></script>
         <script src="./assets/js/bootstrap.min.js"></script>
-        <script src="./assets/js/jquery-3.6.4.min.js"></script>
         <script src="./assets/js/custom.js"></script>
         <!-- <script src="./assets/js"></script> -->
 </body>
