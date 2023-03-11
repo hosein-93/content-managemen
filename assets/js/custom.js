@@ -159,7 +159,7 @@ function deleteCategory(event) {
         let categoryParent = event.closest(".list-group-item");
         Swal.fire({
                 title: 'آیا مطمئن هستید؟',
-                text: "با تایید عمل حذف، دسته‌بندی ( " + categoryParent.innerText + ") به همراه تمام محتواین آن برای همیشه حذف خواهند شد!",
+                text: "با تایید عمل حذف، دسته‌بندی ( " + categoryParent.innerText + " )  به همراه تمام محتواین آن برای همیشه حذف خواهند شد!",
                 icon: 'error',
                 showCancelButton: true,
                 cancelButtonText: 'انصراف',
@@ -365,7 +365,7 @@ function deleteContent(event) {
         let categoryParent = event.closest(".accordion-body");
         Swal.fire({
                 title: 'آیا مطمئن هستید؟',
-                text: "با تایید عمل حذف، اطلاعات ( " + categoryParent.querySelector(".row a").innerText + ") به همراه تمام محتواین آن برای همیشه حذف خواهند شد!",
+                text: " با تایید عمل حذف، اطلاعات ( " + categoryParent.querySelector(".row a").innerText + " ) به همراه تمام محتواین آن برای همیشه حذف خواهند شد! ",
                 icon: 'error',
                 showCancelButton: true,
                 cancelButtonText: 'انصراف',
