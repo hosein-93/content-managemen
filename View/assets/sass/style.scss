@@ -89,6 +89,7 @@ a {
                 height: 100%;
                 opacity: 1;
                 transition: all 0.5s ease-in-out;
+
                 &:nth-child(even) {
                         .accordion-button {
                                 background-color: var(--bg-color-3);
@@ -103,7 +104,7 @@ a {
                 transition: all 0.5s ease-in-out;
 
                 &:not(.collapsed) {
-                        
+
                         color: var(--bs-dark);
                 }
 
@@ -134,13 +135,16 @@ a {
 
 .breadcrumb {
         margin: 0;
+
         li {
                 &::before {
                         font-family: fontawesome;
                 }
+
                 a {
                         font-size: 0.85rem;
-                        font-weight: 500;;
+                        font-weight: 500;
+                        ;
                         color: var(--bs-primary);
                 }
         }
@@ -175,8 +179,8 @@ div#swal2-html-container {
 
 .tagHide {
         display: block;
-        height: 0;
         transform: scale(0);
+        height: 0;
         padding: 0;
         margin: 0;
         opacity: 0;
@@ -188,22 +192,31 @@ div#swal2-html-container {
         }
 }
 
-.inputShow {
-        height: 40px;
-        padding: .375rem .75rem !important;
-        margin: .5rem 0 !important;
-        transform: scale(1);
-        opacity: 1;
-}
-
 .formShow {
-        height: max-content;
         transform: scale(1);
-        padding: 1rem;
-        margin: 1rem 0;
+        margin: 1rem 0 0 0;
         opacity: 1;
 
         & * {
                 transform: scale(1);
+        }
+}
+
+.inputShow {
+        height: 40px;
+        padding: 0.375rem 0.75rem;
+}
+
+.formCategoryHeight {
+        height: 160px;
+        padding: 1rem;
+}
+
+.formContentHeight {
+        height: 286px;
+        padding: 1rem;
+
+        @media only screen and (max-width:768px) {
+                height: 350px;
         }
 }

@@ -28,7 +28,7 @@ Array.prototype.slice.call(forms)
 // ================================================================
 
 // اضافه کردن تگ جستوجوی دسته بندی به سند
-function addSearchCategory(event) {
+function showTagSearchCategory(event) {
         let search = document.createElement("input");
         let searchAttribute = { "type": "text", "name": "searchCategory", "placeholder": "جست‌وجوی دسته‌بندی", "class": "form-control shadow-none rounded-3 tagHide", "data-search": "category", "onkeyup": "searchCategory(this)", "required": "" };
         for (var key in searchAttribute) {
@@ -38,11 +38,12 @@ function addSearchCategory(event) {
         if (event.getAttribute("aria-expanded") === "false") {
                 event.setAttribute("aria-expanded", "true");
                 setTimeout((event) => {
-                        search.classList.add("inputShow");
+                        search.classList.add("formShow", "inputShow");
                 }, 100);
                 event.closest("section").appendChild(search);
         } else {
                 let searchInput = document.querySelector("input[data-search='category']");
+                searchInput.classList.remove("formShow");
                 searchInput.classList.remove("inputShow");
                 setTimeout((event) => {
                         searchInput.remove();
@@ -63,8 +64,8 @@ function searchCategory(event) {
         for (counter = 0; counter < parentLength; counter++) {
                 tagString = tagParent[counter].querySelector("label");
                 // (tagString.innerText.indexOf(searchValue) > -1) ?
-                        // tagParent[counter].style.display = "block" :
-                        // tagParent[counter].style.display = "none";
+                // tagParent[counter].style.display = "block" :
+                // tagParent[counter].style.display = "none";
                 (tagString.innerText.indexOf(searchValue) > -1) ?
                         tagParent[counter].setAttribute("style", "opacity:1;height:100%;") :
                         tagParent[counter].setAttribute("style", "opacity:0; height:0px; padding:0 !important;");
@@ -78,15 +79,15 @@ function searchCategory(event) {
 // اضافه کردن مجموعه تگ‌های افزودن دسته بندی جدید
 function addCategory(event) {
         let addCategoryButtonParent = event.closest("section");
-        let formHtml = '<input type="text" placeholder="نام دسته&zwnj;بندی" name="addCategoryName" class="form-control shadow-none mb-2 rounded-3" required> \
-                                <select name="addCategoryParent" class="form-select form-select-sm shadow-none mb-2 rounded-3" size="1" required>  \
-                                        <option selected> Open this select menu </option> \
-                                        <option value="1">One</option> \
-                                        <option value="2">Two</option> \
-                                        <option value="3">Three</option> \
+        let formHtml = '<input type="text" placeholder="نام دسته&zwnj;بندی" name="AddCategory-Name" class="form-control shadow-none mb-2 rounded-3" required> \
+                                <select name="AddCategory-Parent" class="form-select form-select-sm shadow-none mb-2 rounded-3" size="1" required>  \
+                                        <option value="basic" selected>اصلی</option> \
+                                        <option value="css">css</option> \
+                                        <option value="js">js</option> \
+                                        <option value="php">php</option> \
                                 </select> \
-                                <button type="submit" name="submitCreateNewCategory" class="btn bg-white border border-1 d-block text-success ms-auto">افزودن</button>';
-        let formAttribute = { "action": "#", "method": "POST", "name": "addCategoryForm", "class": "w-100 rounded-3 shadow-sm needs-validation tagHide", "data-form": "addCategory", "novalidate": "" };
+                                <button type="submit" name="AddCategory-Submit" class="btn bg-white border border-1 d-block text-success ms-auto">افزودن</button>';
+        let formAttribute = { "action": "#", "method": "POST", "name": "AddCategory-Form", "class": "w-100 rounded-3 shadow-sm needs-validation tagHide", "data-form": "AddCategory", "novalidate": "" };
 
         let form = document.createElement("form");
         for (var key in formAttribute) {
@@ -97,12 +98,13 @@ function addCategory(event) {
         if (event.getAttribute("aria-expanded") === "false") {
                 addCategoryButtonParent.appendChild(form);
                 setTimeout((event) => {
-                        form.classList.add("formShow");
+                        form.classList.add("formShow", "formCategoryHeight");
                 }, 100);
                 event.setAttribute("aria-expanded", "true");
         } else {
-                let form = document.querySelector("form[data-form='addCategory']");
+                let form = document.querySelector("form[data-form='AddCategory']");
                 form.classList.remove("formShow");
+                form.classList.remove("formCategoryHeight");
                 setTimeout((event) => {
                         form.remove();
                 }, 1000);
@@ -117,16 +119,16 @@ function addCategory(event) {
 // ویرایش دسته‌بندی‌های موجود
 function editCategory(event) {
         let categoryParent = event.closest(".list-group-item");
-        let formHtml = '<input type="text" placeholder="نام جدید" name="editCategory-' + event.dataset.categoryEdit + '" class="form-control shadow-none mb-2 rounded-3" required"> \
-                                <select name="editCategoryParent-' + event.dataset.categoryEdit + '" class="form-select form-select-sm shadow-none mb-2 rounded-3" size="1" required>  \
-                                        <option selected> Open this select menu </option> \
-                                        <option value="1">One</option> \
-                                        <option value="2">Two</option> \
-                                        <option value="3">Three</option> \
+        let formHtml = '<input type="text" placeholder="نام جدید" name="EditCategory-Name-' + event.dataset.categoryEdit + '" class="form-control shadow-none mb-2 rounded-3" required"> \
+                                <select name="EditCategory-Parent-' + event.dataset.categoryEdit + '" class="form-select form-select-sm shadow-none mb-2 rounded-3" size="1" required>  \
+                                        <option value="basic" selected> اصلی </option> \
+                                        <option value="css">css</option> \
+                                        <option value="js">js</option> \
+                                        <option value="php">php</option> \
                                 </select> \
                                 <input type="radio" value="' + event.dataset.categoryEdit + '" class="form-check-input d-none" checked disabled required> \
-                                <button type="submit" name="submitEditNewCategory-' + event.dataset.categoryEdit + '" class="btn bg-white border border-1 d-block text-success ms-auto">ویرایش</button>';
-        let formAttribute = { "action": "#", "method": "POST", "name": "editCategoryForm-" + event.dataset.categoryEdit, "class": "w-100 rounded-3 shadow-sm needs-validation tagHide", "data-form": "editCategory", "novalidate": "" };
+                                <button type="submit" name="EditCategory-Submit-' + event.dataset.categoryEdit + '" class="btn bg-white border border-1 d-block text-success ms-auto">ویرایش</button>';
+        let formAttribute = { "action": "#", "method": "POST", "name": "EditCategory-Form-" + event.dataset.categoryEdit, "class": "w-100 rounded-3 shadow-sm needs-validation tagHide", "data-form": "EditCategory", "novalidate": "" };
 
         let form = document.createElement("form");
         for (var key in formAttribute) {
@@ -137,12 +139,13 @@ function editCategory(event) {
         if (event.getAttribute("aria-expanded") === "false") {
                 categoryParent.appendChild(form);
                 setTimeout((event) => {
-                        form.classList.add("formShow");
+                        form.classList.add("formShow", "formCategoryHeight");
                 }, 100);
                 event.setAttribute("aria-expanded", "true");
         } else {
                 let form = categoryParent.querySelector("form");
                 form.classList.remove("formShow");
+                form.classList.remove("formCategoryHeight");
                 setTimeout((event) => {
                         form.remove();
                 }, 600);
@@ -204,7 +207,7 @@ function deleteCategory(event) {
 // ================================================================
 
 // اضافه کردن تگ جستوجوی محتوا به سند
-function addSearchContent(event) {
+function showTagSearchContent(event) {
         let search = document.createElement("input");
         let searchAttribute = { "type": "text", "name": "searchContent", "placeholder": "جست‌وجوی محتوا", "class": "form-control shadow-none rounded-3 tagHide", "data-search": "content", "onkeyup": "searchContent(this)", "required": "" };
         for (var key in searchAttribute) {
@@ -214,12 +217,13 @@ function addSearchContent(event) {
         if (event.getAttribute("aria-expanded") === "false") {
                 event.setAttribute("aria-expanded", "true");
                 setTimeout((event) => {
-                        search.classList.add("inputShow");
+                        search.classList.add("formShow", "inputShow");
                 }, 100);
                 event.closest("section").appendChild(search);
         } else {
                 let searchInput = document.querySelector("input[data-search='content']");
                 searchInput.classList.remove("inputShow");
+                searchInput.classList.remove("formShow");
                 setTimeout((event) => {
                         searchInput.remove();
                 }, 1000);
@@ -239,8 +243,8 @@ function searchContent(event) {
         for (counter = 0; counter < parentLength; counter++) {
                 tagString = tagParent[counter].querySelector(".accordion-button > span ");
                 // (tagString.innerText.indexOf(searchValue) > -1) ?
-                        // tagParent[counter].style.display = "block" :
-                        // tagParent[counter].style.display = "none";
+                // tagParent[counter].style.display = "block" :
+                // tagParent[counter].style.display = "none";
                 (tagString.innerText.indexOf(searchValue) > -1) ?
                         tagParent[counter].setAttribute("style", "opacity:1;height:100%;") :
                         tagParent[counter].setAttribute("style", "opacity:0; height:0px;");
@@ -256,28 +260,28 @@ function addContent(event) {
         let addCategoryButtonParent = event.closest("section");
         let formHtml = '<div class="row g-md-2" dir="ltr"> \
                                         <div class="col-12 col-md-6"> \
-                                                <input type="text" placeholder="Site Name ... " name="addContentName" class="form-control shadow-none rounded-3" required> \
+                                                <input type="text" placeholder="Site Name ... " name="AddContent-Name" class="form-control shadow-none rounded-3" required> \
                                         </div> \
                                         <div class="col-12 col-md-6" dir="rtl"> \
-                                                <select name="addContentCategory" class="form-select form-select-sm shadow-none mb-2 rounded-3" size="1" required> \
-                                                        <option selected> Open this select menu </option> \
-                                                        <option value="1">One</option> \
-                                                        <option value="2">Two</option> \
-                                                        <option value="3">Three</option> \
+                                                <select name="AddContent-Category" class="form-select form-select-sm shadow-none mb-2 rounded-3" size="1" required> \
+                                                        <option value="basic" selected> اصلی </option> \
+                                                        <option value="css">css</option> \
+                                                        <option value="js">js</option> \
+                                                        <option value="php">php</option> \
                                                 </select> \
                                         </div> \
                                         <div class="col-12 col-md-6"> \
-                                                <input type="text" placeholder="User Name ... " name="addContentUserName" class="form-control shadow-none rounded-3"> \
+                                                <input type="text" placeholder="User Name ... " name="AddContent-UserName" class="form-control shadow-none rounded-3"> \
                                         </div> \
                                         <div class="col-12 col-md-6"> \
-                                                <input type="text" placeholder="Password ... " name="addContentPassword" class="form-control shadow-none rounded-3"> \
+                                                <input type="text" placeholder="Password ... " name="AddContent-Password" class="form-control shadow-none rounded-3"> \
                                         </div> \
                                         <div class="col-12"> \
-                                                <textarea placeholder="توضیحات اضافه ... " name="addContentDescription" cols="" rows="4" class="form-control shadow-none rounded-3" dir="rtl"></textarea> \
+                                                <textarea placeholder="توضیحات اضافه ... " name="AddContent-Description" cols="" rows="4" class="form-control shadow-none rounded-3" dir="rtl"></textarea> \
                                         </div> \
                                 </div> \
-                                <button type="submit" name="submitCreateNewContent" class="btn bg-white border border-1 d-block text-success mt-2 ms-auto">افزودن</button>';
-        let formAttribute = { "action": "#", "method": "POST", "name": "addContentForm", "class": "w-100 rounded-3 shadow-sm validation tagHide", "data-form": "addContent", "novalidate": "" };
+                                <button type="submit" name="AddContent-Submit" class="btn bg-white border border-1 d-block text-success mt-2 ms-auto">افزودن</button>';
+        let formAttribute = { "action": "#", "method": "POST", "name": "AddContent-Form", "class": "w-100 rounded-3 shadow-sm validation tagHide", "data-form": "AddContent", "novalidate": "" };
 
         let form = document.createElement("form");
         for (var key in formAttribute) {
@@ -288,12 +292,13 @@ function addContent(event) {
         if (event.getAttribute("aria-expanded") === "false") {
                 addCategoryButtonParent.appendChild(form);
                 setTimeout((event) => {
-                        form.classList.add("formShow");
+                        form.classList.add("formShow", "formContentHeight");
                 }, 100);
                 event.setAttribute("aria-expanded", "true");
         } else {
-                let form = document.querySelector("form[data-form='addContent']");
+                let form = document.querySelector("form[data-form='AddContent']");
                 form.classList.remove("formShow");
+                form.classList.remove("formContentHeight");
                 setTimeout((event) => {
                         form.remove();
                 }, 1000);
@@ -310,29 +315,29 @@ function editContent(event) {
         let categoryParent = event.closest(".accordion-body");
         let formHtml = '<div class="row g-md-2" dir="ltr"> \
                                         <div class="col-12 col-md-6"> \
-                                                <input type="text" placeholder="Site Name ... " name="edditContentName-' + event.dataset.contentEdit + '" class="form-control shadow-none rounded-3" required> \
+                                                <input type="text" placeholder="Site Name ... " name="EdditContent-Name-' + event.dataset.contentEdit + '" class="form-control shadow-none rounded-3" required> \
                                         </div> \
                                         <div class="col-12 col-md-6" dir="rtl"> \
-                                                <select name="edditContentCategory" class="form-select form-select-sm shadow-none mb-2 rounded-3" size="1" required> \
-                                                        <option selected> Open this select menu </option> \
-                                                        <option value="1">One</option> \
-                                                        <option value="2">Two</option> \
-                                                        <option value="3">Three</option> \
+                                                <select name="EdditContent-Category' + event.dataset.contentEdit + '" class="form-select form-select-sm shadow-none mb-2 rounded-3" size="1" required> \
+                                                        <option value="basic" selected> اصلی </option> \
+                                                        <option value="css">css</option> \
+                                                        <option value="js">js</option> \
+                                                        <option value="php">php</option> \
                                                 </select> \
                                         </div> \
                                         <div class="col-12 col-md-6"> \
-                                                <input type="text" placeholder="User Name ... " name="edditContentUserName-' + event.dataset.contentEdit + '" class="form-control shadow-none rounded-3"> \
+                                                <input type="text" placeholder="User Name ... " name="EdditContent-UserName-' + event.dataset.contentEdit + '" class="form-control shadow-none rounded-3"> \
                                         </div> \
                                         <div class="col-12 col-md-6"> \
-                                                <input type="text" placeholder="Password ... " name="editContentPassword-' + event.dataset.contentEdit + '" class="form-control shadow-none rounded-3"> \
+                                                <input type="text" placeholder="Password ... " name="EdditContent-Password-' + event.dataset.contentEdit + '" class="form-control shadow-none rounded-3"> \
                                         </div> \
                                         <div class="col-12"> \
-                                                <textarea placeholder="توضیحات اضافه ... " name="editContentDescription-' + event.dataset.contentEdit + '" cols="" rows="4" class="form-control shadow-none rounded-3" dir="rtl"></textarea> \
+                                                <textarea placeholder="توضیحات اضافه ... " name="EdditContent-Description-' + event.dataset.contentEdit + '" cols="" rows="4" class="form-control shadow-none rounded-3" dir="rtl"></textarea> \
                                         </div> \
                                         <input type="radio" value="' + event.dataset.contentEdit + '" class="form-check-input d-none" checked disabled="" required=""> \
                                 </div> \
                                 <button type="submit" name="submitEditContent" class="btn bg-white border border-1 d-block text-success mt-2 ms-auto">ویرایش</button>';
-        let formAttribute = { "action": "#", "method": "POST", "name": "editContentForm-" + event.dataset.contentEdit, "class": "w-100 rounded-3 shadow-sm validation tagHide", "data-form": "editContent", "novalidate": "" };
+        let formAttribute = { "action": "#", "method": "POST", "name": "EdditContent-Form-" + event.dataset.contentEdit, "class": "w-100 rounded-3 shadow-sm validation tagHide", "data-form": "EdditContent", "novalidate": "" };
 
         let form = document.createElement("form");
         for (var key in formAttribute) {
@@ -343,12 +348,13 @@ function editContent(event) {
         if (event.getAttribute("aria-expanded") === "false") {
                 categoryParent.appendChild(form);
                 setTimeout((event) => {
-                        form.classList.add("formShow");
+                        form.classList.add("formShow", "formContentHeight");
                 }, 100);
                 event.setAttribute("aria-expanded", "true");
         } else {
                 let form = categoryParent.querySelector("form");
                 form.classList.remove("formShow");
+                form.classList.remove("formContentHeight");
                 setTimeout((event) => {
                         form.remove();
                 }, 600);

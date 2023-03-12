@@ -226,8 +226,8 @@ div#swal2-html-container {
 
 .tagHide {
   display: block;
-  height: 0;
   transform: scale(0);
+  height: 0;
   padding: 0;
   margin: 0;
   opacity: 0;
@@ -238,22 +238,31 @@ div#swal2-html-container {
   transition: all 0.5s 0.3s ease-in-out;
 }
 
-.inputShow {
-  height: 40px;
-  padding: 0.375rem 0.75rem !important;
-  margin: 0.5rem 0 !important;
-  transform: scale(1);
-  opacity: 1;
-}
-
 .formShow {
-  height: -moz-max-content;
-  height: max-content;
   transform: scale(1);
-  padding: 1rem;
-  margin: 1rem 0;
+  margin: 1rem 0 0 0;
   opacity: 1;
 }
 .formShow * {
   transform: scale(1);
+}
+
+.inputShow {
+  height: 40px;
+  padding: 0.375rem 0.75rem;
+}
+
+.formCategoryHeight {
+  height: 160px;
+  padding: 1rem;
+}
+
+.formContentHeight {
+  height: 286px;
+  padding: 1rem;
+}
+@media only screen and (max-width: 768px) {
+  .formContentHeight {
+    height: 350px;
+  }
 }/*# sourceMappingURL=style.css.map */
