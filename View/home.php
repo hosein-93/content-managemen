@@ -9,10 +9,16 @@
                 <div class="container">
                         <div class="row g-5">
                                 <div class="col-xx1-4 col-xl-4 col-lg-4 col-md-5 col-sm-12 col-xs-12 col-12">
-                                        <?php include "./View/Category/Category.php"; ?>
+                                        <aside class="row align-content-start py-3">
+                                                <?php include "./View/Category/CategoryHeader.php"; ?>
+                                                <?php include "./View/Category/CategoryList.php"; ?>
+                                        </aside>
                                 </div>
                                 <div class="col-xx1-8 col-xl-8 col-lg-8 col-md-7 col-sm-12 col-xs-12 col-12">
-                                        <?php include "./View/Content/Content.php"; ?>
+                                        <main class="row align-content-start py-3">
+                                                <?php include "./View/Content/ContentHeader.php"; ?>
+                                                <?php include "./View/Content/ContentList.php"; ?>
+                                        </main>
                                 </div>
                         </div>
                 </div>

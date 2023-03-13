@@ -79,15 +79,16 @@ function searchCategory(event) {
 // اضافه کردن مجموعه تگ‌های افزودن دسته بندی جدید
 function addCategory(event) {
         let addCategoryButtonParent = event.closest("section");
-        let formHtml = '<input type="text" placeholder="نام دسته&zwnj;بندی" name="AddCategory-Name" class="form-control shadow-none mb-2 rounded-3" required> \
-                                <select name="AddCategory-Parent" class="form-select form-select-sm shadow-none mb-2 rounded-3" size="1" required>  \
+        let formHtml = '<input type="text" placeholder="نام دسته&zwnj;بندی" name="Name" class="form-control shadow-none mb-2 rounded-3" required> \
+                                <select name="Parent" class="form-select form-select-sm shadow-none mb-2 rounded-3" size="1" required>  \
                                         <option value="basic" selected>اصلی</option> \
                                         <option value="css">css</option> \
                                         <option value="js">js</option> \
                                         <option value="php">php</option> \
                                 </select> \
-                                <button type="submit" name="AddCategory-Submit" class="btn bg-white border border-1 d-block text-success ms-auto">افزودن</button>';
-        let formAttribute = { "action": "#", "method": "POST", "name": "AddCategory-Form", "class": "w-100 rounded-3 shadow-sm needs-validation tagHide", "data-form": "AddCategory", "novalidate": "" };
+                                <input type="radio" name="Number" value="0" class="form-check-input d-none" checked required> \
+                                <button type="submit" name="Submit" class="btn bg-white border border-1 d-block text-success ms-auto shadow-none">افزودن</button>';
+        let formAttribute = { "action": "#", "method": "POST", "name": "AddCategory", "class": "w-100 rounded-3 shadow-sm needs-validation tagHide", "onsubmit":"FormSubmit(event);", "novalidate": "" };
 
         let form = document.createElement("form");
         for (var key in formAttribute) {
@@ -102,7 +103,7 @@ function addCategory(event) {
                 }, 100);
                 event.setAttribute("aria-expanded", "true");
         } else {
-                let form = document.querySelector("form[data-form='AddCategory']");
+                let form = addCategoryButtonParent.querySelector("form");
                 form.classList.remove("formShow");
                 form.classList.remove("formCategoryHeight");
                 setTimeout((event) => {
@@ -110,6 +111,15 @@ function addCategory(event) {
                 }, 1000);
                 event.setAttribute("aria-expanded", "false");
         }
+
+        // زمانی که فرم ایجاد شد موارد زیر را چک می کند
+        if (event.nextElementSibling.tagName !== "FORM") {
+                return alert("تگ هدف یک فرم نیست!");
+        }
+        if (event.getAttribute("aria-expanded") === "false") {
+                return false;
+        }
+
 }
 
 // ================================================================
@@ -119,16 +129,16 @@ function addCategory(event) {
 // ویرایش دسته‌بندی‌های موجود
 function editCategory(event) {
         let categoryParent = event.closest(".list-group-item");
-        let formHtml = '<input type="text" placeholder="نام جدید" name="EditCategory-Name-' + event.dataset.categoryEdit + '" class="form-control shadow-none mb-2 rounded-3" required"> \
-                                <select name="EditCategory-Parent-' + event.dataset.categoryEdit + '" class="form-select form-select-sm shadow-none mb-2 rounded-3" size="1" required>  \
+        let formHtml = '<input type="text" placeholder="نام جدید" name="Name" class="form-control shadow-none mb-2 rounded-3" required"> \
+                                <select name="Parent" class="form-select form-select-sm shadow-none mb-2 rounded-3" size="1" required>  \
                                         <option value="basic" selected> اصلی </option> \
                                         <option value="css">css</option> \
                                         <option value="js">js</option> \
                                         <option value="php">php</option> \
                                 </select> \
-                                <input type="radio" value="' + event.dataset.categoryEdit + '" class="form-check-input d-none" checked disabled required> \
-                                <button type="submit" name="EditCategory-Submit-' + event.dataset.categoryEdit + '" class="btn bg-white border border-1 d-block text-success ms-auto">ویرایش</button>';
-        let formAttribute = { "action": "#", "method": "POST", "name": "EditCategory-Form-" + event.dataset.categoryEdit, "class": "w-100 rounded-3 shadow-sm needs-validation tagHide", "data-form": "EditCategory", "novalidate": "" };
+                                <input type="radio" name="Number" value="' + event.dataset.categoryEdit + '" class="form-check-input d-none" checked required> \
+                                <button type="submit" name="Submit" class="btn bg-white border border-1 d-block text-success ms-auto shadow-none">ویرایش</button>';
+        let formAttribute = { "action": "#", "method": "POST", "name": "EditCategory", "class": "w-100 rounded-3 shadow-sm needs-validation tagHide", "onsubmit":"FormSubmit(event);", "novalidate": "" };
 
         let form = document.createElement("form");
         for (var key in formAttribute) {
@@ -151,6 +161,7 @@ function editCategory(event) {
                 }, 600);
                 event.setAttribute("aria-expanded", "false");
         }
+
 }
 
 // ================================================================
@@ -260,10 +271,10 @@ function addContent(event) {
         let addCategoryButtonParent = event.closest("section");
         let formHtml = '<div class="row g-md-2" dir="ltr"> \
                                         <div class="col-12 col-md-6"> \
-                                                <input type="text" placeholder="Site Name ... " name="AddContent-Name" class="form-control shadow-none rounded-3" required> \
+                                                <input type="text" placeholder="Site Name ... " name="Name" class="form-control shadow-none rounded-3" required> \
                                         </div> \
                                         <div class="col-12 col-md-6" dir="rtl"> \
-                                                <select name="AddContent-Category" class="form-select form-select-sm shadow-none mb-2 rounded-3" size="1" required> \
+                                                <select name="Category" class="form-select form-select-sm shadow-none mb-2 rounded-3" size="1" required> \
                                                         <option value="basic" selected> اصلی </option> \
                                                         <option value="css">css</option> \
                                                         <option value="js">js</option> \
@@ -271,17 +282,18 @@ function addContent(event) {
                                                 </select> \
                                         </div> \
                                         <div class="col-12 col-md-6"> \
-                                                <input type="text" placeholder="User Name ... " name="AddContent-UserName" class="form-control shadow-none rounded-3"> \
+                                                <input type="text" placeholder="User Name ... " name="UserName" class="form-control shadow-none rounded-3"> \
                                         </div> \
                                         <div class="col-12 col-md-6"> \
-                                                <input type="text" placeholder="Password ... " name="AddContent-Password" class="form-control shadow-none rounded-3"> \
+                                                <input type="text" placeholder="Password ... " name="Password" class="form-control shadow-none rounded-3"> \
                                         </div> \
                                         <div class="col-12"> \
-                                                <textarea placeholder="توضیحات اضافه ... " name="AddContent-Description" cols="" rows="4" class="form-control shadow-none rounded-3" dir="rtl"></textarea> \
+                                                <textarea placeholder="توضیحات اضافه ... " name="Description" cols="" rows="4" class="form-control shadow-none rounded-3" dir="rtl"></textarea> \
                                         </div> \
+                                        <input type="radio" name="Number" value="0" class="form-check-input d-none" checked required> \
                                 </div> \
-                                <button type="submit" name="AddContent-Submit" class="btn bg-white border border-1 d-block text-success mt-2 ms-auto">افزودن</button>';
-        let formAttribute = { "action": "#", "method": "POST", "name": "AddContent-Form", "class": "w-100 rounded-3 shadow-sm validation tagHide", "data-form": "AddContent", "novalidate": "" };
+                                <button type="submit" name="Submit" class="btn bg-white border border-1 d-block text-success mt-2 ms-auto shadow-none">افزودن</button>';
+        let formAttribute = { "action": "#", "method": "POST", "name": "AddContent", "class": "w-100 rounded-3 shadow-sm validation tagHide", "onsubmit":"FormSubmit(event);", "novalidate": "" };
 
         let form = document.createElement("form");
         for (var key in formAttribute) {
@@ -296,7 +308,7 @@ function addContent(event) {
                 }, 100);
                 event.setAttribute("aria-expanded", "true");
         } else {
-                let form = document.querySelector("form[data-form='AddContent']");
+                let form = addCategoryButtonParent.querySelector("form");
                 form.classList.remove("formShow");
                 form.classList.remove("formContentHeight");
                 setTimeout((event) => {
@@ -304,6 +316,15 @@ function addContent(event) {
                 }, 1000);
                 event.setAttribute("aria-expanded", "false");
         }
+
+        // زمانی که فرم ایجاد شد موارد زیر را چک می کند
+        if (event.nextElementSibling.tagName !== "FORM") {
+                return alert("تگ هدف یک فرم نیست!");
+        }
+        if (event.getAttribute("aria-expanded") === "false") {
+                return false;
+        }
+
 }
 
 // ================================================================
@@ -315,10 +336,10 @@ function editContent(event) {
         let categoryParent = event.closest(".accordion-body");
         let formHtml = '<div class="row g-md-2" dir="ltr"> \
                                         <div class="col-12 col-md-6"> \
-                                                <input type="text" placeholder="Site Name ... " name="EdditContent-Name-' + event.dataset.contentEdit + '" class="form-control shadow-none rounded-3" required> \
+                                                <input type="text" placeholder="Site Name ... " name="Name" class="form-control shadow-none rounded-3" required> \
                                         </div> \
                                         <div class="col-12 col-md-6" dir="rtl"> \
-                                                <select name="EdditContent-Category' + event.dataset.contentEdit + '" class="form-select form-select-sm shadow-none mb-2 rounded-3" size="1" required> \
+                                                <select name="Category" class="form-select form-select-sm shadow-none mb-2 rounded-3" size="1" required> \
                                                         <option value="basic" selected> اصلی </option> \
                                                         <option value="css">css</option> \
                                                         <option value="js">js</option> \
@@ -326,18 +347,18 @@ function editContent(event) {
                                                 </select> \
                                         </div> \
                                         <div class="col-12 col-md-6"> \
-                                                <input type="text" placeholder="User Name ... " name="EdditContent-UserName-' + event.dataset.contentEdit + '" class="form-control shadow-none rounded-3"> \
+                                                <input type="text" placeholder="User Name ... " name="UserName" class="form-control shadow-none rounded-3"> \
                                         </div> \
                                         <div class="col-12 col-md-6"> \
-                                                <input type="text" placeholder="Password ... " name="EdditContent-Password-' + event.dataset.contentEdit + '" class="form-control shadow-none rounded-3"> \
+                                                <input type="text" placeholder="Password ... " name="Password" class="form-control shadow-none rounded-3"> \
                                         </div> \
                                         <div class="col-12"> \
-                                                <textarea placeholder="توضیحات اضافه ... " name="EdditContent-Description-' + event.dataset.contentEdit + '" cols="" rows="4" class="form-control shadow-none rounded-3" dir="rtl"></textarea> \
+                                                <textarea placeholder="توضیحات اضافه ... " name="Description" cols="" rows="4" class="form-control shadow-none rounded-3" dir="rtl"></textarea> \
                                         </div> \
-                                        <input type="radio" value="' + event.dataset.contentEdit + '" class="form-check-input d-none" checked disabled="" required=""> \
+                                        <input type="radio" name="Number" value="' + event.dataset.contentEdit + '" class="form-check-input d-none" checked required> \
                                 </div> \
-                                <button type="submit" name="submitEditContent" class="btn bg-white border border-1 d-block text-success mt-2 ms-auto">ویرایش</button>';
-        let formAttribute = { "action": "#", "method": "POST", "name": "EdditContent-Form-" + event.dataset.contentEdit, "class": "w-100 rounded-3 shadow-sm validation tagHide", "data-form": "EdditContent", "novalidate": "" };
+                                <button type="submit" name="Submit" class="btn bg-white border border-1 d-block text-success mt-2 ms-auto shadow-none">ویرایش</button>';
+        let formAttribute = { "action": "#", "method": "POST", "name": "EdditContent", "class": "w-100 rounded-3 shadow-sm validation tagHide", "onsubmit":"FormSubmit(event);", "novalidate": "" };
 
         let form = document.createElement("form");
         for (var key in formAttribute) {
