@@ -1,6 +1,6 @@
-document/
-View/assets/font
-assets/img
+document
+font
+img
 
 
 *.map
