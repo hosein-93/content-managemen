@@ -1,6 +1,8 @@
-<?php 
+<?php
 
-namespace Controller\Ajax;
+include '../autoLoader.php';
+
+
 
 parse_str($_REQUEST["data"], $formInformation);
 echo "<pre>";
