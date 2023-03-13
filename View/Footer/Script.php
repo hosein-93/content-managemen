@@ -14,11 +14,19 @@ use Controller\Constant;
                 // event.stopPropagation();
                 event.preventDefault();
 
-                let formData = {
-                        "form": event.target.name
-                };
-                for (var i = 0; i < event.target.length; i++) {
-                        formData[event.target[i].name] = event.target[i].value;
+                if (event.target[0].value === '') {
+                        Swal.fire({
+                                position: 'center-top',
+                                icon: 'warning',
+                                title: '',
+                                text: 'فیلدهای ستاره‌دار نمی‌توانند خالی باشند.',
+                                width: 260,
+                                padding: '0 0 1rem 0',
+                                showConfirmButton: false,
+                                timerProgressBar: true,
+                                timer: 10000
+                        })
+                        return false;
                 }
 
                 $.ajax({
