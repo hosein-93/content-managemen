@@ -58,7 +58,7 @@
                                                 <a class="text-danger CP-icon" data-content-delete="1" aria-expanded="false" onclick="deleteContent(this);">
                                                         <i class="fa-solid fa-trash"></i>
                                                 </a>
-                                                <a class="text-warning CP-icon" data-content-edit="1" aria-expanded="false" onclick="editContent(this);">
+                                                <a class="text-warning CP-icon" data-content-edit="1" aria-expanded="false" data-status="editContent" onclick="editContent(this);">
                                                         <i class="fa-solid fa-pen-to-square"></i>
                                                 </a>
                                         </div>

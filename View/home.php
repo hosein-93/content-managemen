@@ -5,6 +5,7 @@
 
 <body class="bg-light">
         <?php include "./View/Header/Header.php"; ?>
+        <div class="bg-dark text-warning p-3 my-3 rounded-3" id="test" style="min-height:100px;"></div>
         <section class="container-fluid">
                 <div class="container">
                         <div class="row g-5">
