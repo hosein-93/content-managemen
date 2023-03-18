@@ -10,16 +10,25 @@ class CRUDCategorySelect extends CRUD
 {
         private $table = Constant::TABEL["category"];
         private $values;
-        private $valuesDistinct;
+        private $distinct;
+        private $where;
 
-        private function get__values()
+        public function get_values()
         {
-                return $this->values = "SELECT * FROM {$this->database}.{$this->table} ORDER BY " . Constant::COLUMN["name"] . " ASC";
+                $this->values = "SELECT * FROM {$this->database}.{$this->table} ORDER BY " . Constant::COLUMN["id"] . " DESC";
+                return $this->values;
         }
 
-        private function get__valuesDistinct()
+        public function get_distinct()
         {
-                return $this->valuesDistinct = "SELECT DISTINCT " . Constant::COLUMN["name"] . " FROM {$this->database}.{$this->table} ORDER BY " . Constant::COLUMN["name"] . " ASC";
+                $this->distinct = "SELECT DISTINCT " . Constant::COLUMN["name"] . " FROM {$this->database}.{$this->table} ORDER BY " . Constant::COLUMN["name"] . " ASC";
+                return $this->distinct;
+        }
+
+        public function get_where()
+        {
+                $this->where = "SELECT * FROM {$this->database}.{$this->table} WHERE ";
+                return $this->where;
         }
 
         use SELECT;

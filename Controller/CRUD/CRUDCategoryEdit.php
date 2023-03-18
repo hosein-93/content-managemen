@@ -11,25 +11,24 @@ class CRUDCategoryEdit extends CRUD
         private $table = Constant::TABEL["category"];
         private $values;
         private $execute;
-        
-        private function get__values()
+
+        public function get_values()
         {
-                return $this->values = "UPDATE {$this->database}.{$this->table} SET " . 
-                        Constant::COLUMN["name"] . "=:name , " . 
-                        Constant::COLUMN["category"]["parent"] . "=:category , " . 
-                        Constant::COLUMN["update"] . "=:update WHERE " . 
-                        Constant::COLUMN["id"] . " = :id";
+                $this->values = "UPDATE {$this->database}.{$this->table} SET "
+                        . Constant::COLUMN["name"] . "=:name , "
+                        . Constant::COLUMN["update"] . "=:update WHERE "
+                        . Constant::COLUMN["id"] . " = :id ";
+                return $this->values;
         }
 
-        private function get__execute()
+        public function get_execute()
         {
                 $name = htmlentities($this->data["Name"]);
-                $category = htmlentities($this->data["Parent"]);
                 $update = date("Y-m-d H:i:s");
                 $id = htmlentities($this->data["Number"]);
-                return $this->execute = [":name"=>$name, ":category"=>$category, ":update"=>$update, ":id"=>$id];
+                $this->execute = [":name" => $name, ":update" => $update, ":id" => $id];
+                return $this->execute;
         }
 
         use UPDATE;
-
 }

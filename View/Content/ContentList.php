@@ -6,7 +6,7 @@
         <div class="accordion accordion-flush my-3" id="accordionContent" data-searchLive="content">
                 <div class="accordion-item">
                         <div class="accordion-header" id="content-header-1">
-                                <button type="button" class="accordion-button collapsed justify-content-between align-items-center p-2 p-md-3 mb-0 shadow-none" data-bs-toggle="collapse" data-bs-target="#content-collapse-1" aria-expanded="false" aria-controls="content-collapse-1">
+                                <button type="button" class="accordion-button collapsed justify-content-between align-items-center px-3 py-2 mb-0 shadow-none" data-bs-toggle="collapse" data-bs-target="#content-collapse-1" aria-expanded="false" aria-controls="content-collapse-1">
                                         <span>
                                                 <i class="fa-brands fa-chrome"></i>
                                                 <span class="me-1">digikala.com</span>
@@ -36,22 +36,22 @@
                                                         <span class="ms-1 CP-icon">
                                                                 <i class="fa-brands fa-chrome"></i>
                                                         </span>
-                                                        <a href="https://digikala.com" target="_blank" class="fw-bold fst-italic">digikala.com</a>
+                                                        <a href="https://digikala.com" target="_blank" class="fw-bold fst-italic" data-content="name">digikala.com</a>
                                                 </div>
                                                 <div class="col-12 col-md-3 my-3">
                                                         <span class="ms-1 CP-icon">
                                                                 <i class="fa-solid fa-circle-user"></i>
                                                         </span>
-                                                        <span>user name</span>
+                                                        <span data-content="username">user name</span>
                                                 </div>
                                                 <div class="col-12 col-md-3 my-3">
                                                         <span class="ms-1 CP-icon">
                                                                 <i class="fa-solid fa-key"></i>
                                                         </span>
-                                                        <span>password</span>
+                                                        <span data-content="password">password</span>
                                                 </div>
                                                 <div class="col-12 my-3">
-                                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam magnam a dolores ratione commodi amet voluptas explicabo possimus maiores incidunt praesentium molestias dolorum, rem quaerat esse sint dolore odit! Aliquam?</p>
+                                                        <p data-content="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam magnam a dolores ratione commodi amet voluptas explicabo possimus maiores incidunt praesentium molestias dolorum, rem quaerat esse sint dolore odit! Aliquam?</p>
                                                 </div>
                                         </div>
                                         <div class="d-flex justify-content-between align-items-center">

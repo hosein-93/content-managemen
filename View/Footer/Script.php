@@ -13,7 +13,6 @@ use Controller\Constant;
         function FormSubmit(event) {
                 // event.stopPropagation();
                 event.preventDefault();
-                // console.log(event.target.getAttribute("data-status"));
                 if (event.target[0].value === '') {
                         Swal.fire({
                                 position: 'center-top',
@@ -39,14 +38,14 @@ use Controller\Constant;
                         // cache: false,
                         // processData: false,
                         success: function(data) {
-                                // $(event.target).trigger("reset"); // to reset form input fields
-
+                                $(event.target).trigger("reset"); // to reset form input fields
                                 setTimeout(function() {
                                         $("#test").fadeOut(500);
                                         $("#test").html(data);
                                         $("#test").fadeIn(500);
                                 }, 1000);
-
+                                location.reload();
+                                // window.location.replace("");
                         },
                         error: function(e) {
                                 console.log(e);
@@ -54,17 +53,30 @@ use Controller\Constant;
                 });
         }
 
-        // اضافه کردن نام دسته‌بندی‌ها به تگ سلکت در فرم ایجاد دسته‌بندی جدید
+        // اضافه کردن نام دسته‌بندی‌ها به تگ سلکت در فرم ایجاد دسته‌بندی جدید و آپدیت محتوا
         $("[data-status]").click(function() {
-                if ($(this).attr("data-status") === "addCategory") {
-                        let parent = $(this).closest("section");
-                        parent.find("select").html("<?php echo $category_formSelectOption; ?>");
-                } else if ($(this).attr("data-status") === "editCategory") {
-                        let parent = $(this).closest(".list-group-item");
-                        parent.find("select").html("<?php echo $category_formSelectOption; ?>");
-                } else if ($(this).attr("data-status") === "editContent") {
-                        let parent = $(this).closest(".accordion-body");
-                        parent.find("select").html("<?php echo $category_formSelectOption; ?>");
+
+                switch ($(this).attr("data-status")) {
+                        case "addCategory":
+                                var parent = $(this).closest("section");
+                                parent.find("select").html("<?php echo $category_formSelectOption; ?>");
+                                break;
+
+                        case "editCategory":
+                                var parent = $(this).closest(".list-group-item");
+                                parent.find("select").html("<?php echo $category_formSelectOption; ?>");
+                                break;
+
+                        case "":
+                                parent.find("select").html("<?php echo $category_formSelectOption; ?>");
+                                break;
+
+                        case "":
+                                break;
+
+                        default:
                 }
+                console.log();
         })
+
 </script>

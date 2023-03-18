@@ -10,27 +10,29 @@ trait DB_CONNECT
         private $database = Constant::SERVER["database"];
 }
 
-trait INSERT
+trait GET_DATA
 {
-        use DB_CONNECT;
-
         protected $data;
-
         public function __construct($data)
         {
                 $this->data = $data;
                 global $connection;
                 $this->connection = $connection;
         }
+}
 
-        abstract private function set__execute();
-        abstract private function get__execute();
+trait INSERT
+{
+        use DB_CONNECT, GET_DATA;
+
+        abstract public function get_values();
+        abstract public function get_execute();
 
         public function CRUD()
         {
-                $sql = "INSERT INTO {$this->database}.{$this->table} {$this->values}";
+                $sql = $this->get_values();
                 $stm = $this->connection->prepare($sql);
-                $stm->execute($this->get__execute());
+                $stm->execute($this->get_execute());
                 $result =  $this->connection->lastInsertId();
                 return $result;
         }
@@ -38,39 +40,33 @@ trait INSERT
 
 trait UPDATE
 {
-        use DB_CONNECT;
+        use DB_CONNECT, GET_DATA;
 
-        protected $data;
-
-        public function __construct($data)
-        {
-                $this->data = $data;
-                global $connection;
-                $this->connection = $connection;
-        }
-
-        abstract private function get__values();
-        abstract private function get__execute();
+        abstract public function get_values();
+        abstract public function get_execute();
 
         public function CRUD()
         {
-                $sql = $this->get__values();
+                $sql = $this->get_values();
                 $stmt = $this->connection->prepare($sql);
-                $stmt->execute($this->get__execute());
+                $stmt->execute($this->get_execute());
                 $result = $stmt->rowCount();
                 return $result;
         }
 }
 trait DELETE
 {
+
+        abstract public function get_values();
+        abstract public function get_execute();
+
         public function CRUD()
         {
-                // global $pdoConnection, $db, $dbTables, $userInformation;
-                // $sql = "DELETE FROM  invoice.user WHERE id=1";
-                // $stmt = $pdoConnection->prepare($sql);
-                // $stmt->execute();
-                // $result = $stmt->rowCount();
-                // return $result;
+                $sql = $this->get_values();
+                $stmt = $this->connection->prepare($sql);
+                $stmt->execute($this->get_execute());
+                $result = $stmt->rowCount();
+                return $result;
         }
 }
 trait SELECT
@@ -83,23 +79,36 @@ trait SELECT
                 $this->connection = $connection;
         }
 
-        abstract private function get__values();
+        abstract public function get_values();
+        abstract public function get_distinct();
+        abstract public function get_where();
 
         public function CRUD()
         {
-                $sql = $this->get__values();
+                $sql = $this->get_values();
                 $stmt = $this->connection->prepare($sql);
                 $stmt->execute();
                 $result = $stmt->fetchAll();
                 return $result;
         }
 
-        public function CRUD_DISTINCT()
+        public function DISTINCT()
         {
-                $sql = $this->get__valuesDistinct();
+                $sql = $this->get_distinct();
+                $stmt = $this->connection->prepare($sql);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+                return $result;
+        }
+
+        public function WHERE($where)
+        {
+                $sql = $this->get_where() . $where;
                 $stmt = $this->connection->prepare($sql);
                 $stmt->execute();
                 $result = $stmt->fetchAll();
                 return $result;
         }
 }
+
+
