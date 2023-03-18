@@ -168,9 +168,8 @@ function deleteCategory(event) {
                                         });
                                         setTimeout(function() {
                                                 location.reload();
-                                                // window.location.replace("");
-                                        }, 1000);
-                                        document.querySelector("#test").innerHTML = (data);
+                                                window.location.replace("");
+                                        }, 2500);
                                 }
                         });
                 } else if (result.dismiss === Swal.DismissReason.cancel) {

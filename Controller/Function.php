@@ -1,7 +1,7 @@
 <?php
 
 use Controller\Constant;
-use Controller\CRUD\CRUDCategorySelect;
+use Controller\CRUD\CRUD_SELECT;
 
 function showListCategory($select, $margin = 0)
 {
@@ -21,9 +21,11 @@ function showListCategory($select, $margin = 0)
                                         </a>
                                 </div>
                         </div>';
-                $where = Constant::COLUMN["category"]["parent"] . "='{$value['name']}' ORDER BY " . Constant::COLUMN["name"] . " ASC";
-                $selectCategory = new CRUDCategorySelect;
-                $allCategory =  $selectCategory->WHERE($where);
+                $selectCategory = new CRUD_SELECT;
+                $selectCategory->set_data();
+                $sql = "SELECT * FROM {$selectCategory->get_table()} WHERE " . Constant::COLUMN["category"]["parent"] . "='{$value['name']}' ORDER BY " . Constant::COLUMN["name"] . " ASC";
+                $selectCategory->set_sql($sql);
+                $allCategory =  $selectCategory->SELECT();
                 if (!empty($allCategory)) {
                         $margin += 16;
                         echo '<div style="margin-right: ' . $margin . 'px">';
