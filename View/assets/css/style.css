@@ -115,11 +115,11 @@ select {
   height: 40px;
 }
 
-input[type=checkbox] {
+input[type=radio] {
   width: 30px !important;
   height: 18px !important;
 }
-input[type=checkbox]:checked {
+input[type=radio]:checked {
   background-color: var(--bs-success);
 }
 
@@ -150,6 +150,13 @@ a.CP-icon {
 .list-group > .list-group-item:nth-child(odd) {
   background-color: var(--bg-color-2);
 }
+.list-group > .list-group-item label {
+  min-width: 125px;
+  cursor: pointer;
+}
+.list-group div:nth-child(odd) > .list-group-item {
+  background-color: var(--bg-color-2);
+}
 
 .accordion .accordion-item {
   height: 100%;
@@ -169,8 +176,8 @@ a.CP-icon {
   color: var(--bs-dark);
 }
 .accordion .accordion-button::after {
-  width: 30px;
-  height: 30px;
+  width: 27px;
+  height: 27px;
   margin: 0;
   border-radius: 50%;
   background-size: 15px;
@@ -258,7 +265,7 @@ div#swal2-html-container {
 }
 
 .formCategoryHeight {
-  height: 160px;
+  height: 72px;
   padding: 1rem;
 }
 

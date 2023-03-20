@@ -12,7 +12,6 @@ class Constant
         const TABEL = ["category" => "category", "site" => "content"];
         const COLUMN = [
                 "id" => "id", "name" => "name", "create" => "create_at", "update" => "update_at", "user" => "username", "pass" => "password", "description" => "description",
-                "category" => ["parent" => "parent"],
                 "site" => ["cat_id" => "category_id"]
         ];
         const FORM = ["status", "form", "Name", "Parent", "Number", "Submit", "Category", "UserName", "Password", "Description"];

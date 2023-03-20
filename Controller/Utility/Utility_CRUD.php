@@ -24,8 +24,7 @@ trait CRUD
 
         public function INSERT()
         {
-                $sql = $this->get_sql();
-                $stmt = $this->connection->prepare($sql);
+                $stmt = $this->connection->prepare($this->get_sql());
                 $stmt->execute($this->get_execute());
                 $result =  $this->connection->lastInsertId();
                 return $result;
@@ -33,8 +32,7 @@ trait CRUD
 
         public function UPDATE()
         {
-                $sql = $this->get_sql();
-                $stmt = $this->connection->prepare($sql);
+                $stmt = $this->connection->prepare($this->get_sql());
                 $stmt->execute($this->get_execute());
                 $result = $stmt->rowCount();
                 return $result;
@@ -42,8 +40,7 @@ trait CRUD
 
         public function DELETE()
         {
-                $sql = $this->get_sql();
-                $stmt = $this->connection->prepare($sql);
+                $stmt = $this->connection->prepare($this->get_sql());
                 $stmt->execute($this->get_execute());
                 $result = $stmt->rowCount();
                 return $result;
@@ -51,8 +48,7 @@ trait CRUD
 
         public function SELECT()
         {
-                $sql = $this->get_sql();
-                $stmt = $this->connection->prepare($sql);
+                $stmt = $this->connection->prepare($this->get_sql());
                 $stmt->execute($this->get_execute());
                 $result = $stmt->fetchAll();
                 return $result;

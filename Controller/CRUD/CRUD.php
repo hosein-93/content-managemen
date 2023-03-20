@@ -2,7 +2,6 @@
 
 namespace Controller\CRUD;
 
-use Controller\Constant;
 use Controller\Utility\CRUD as Trait_CRUD;
 
 abstract class CRUD
@@ -28,7 +27,7 @@ abstract class CRUD
 
         protected function set_table()
         {
-                $this->table = $this->database . "." . Constant::TABEL["category"];
+                $this->table = $this->database . ".{$this->data["table"]}";
         }
 
         public function get_table()

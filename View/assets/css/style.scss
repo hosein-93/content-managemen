@@ -48,7 +48,7 @@ select {
 }
 
 input {
-        &[type="checkbox"] {
+        &[type="radio"] {
                 width: 30px !important;
                 height: 18px !important;
 
@@ -87,6 +87,19 @@ a {
                 &:nth-child(odd) {
                         background-color: var(--bg-color-2);
                 }
+
+                label {
+                        min-width: 125px;
+                        cursor: pointer;
+                }
+        }
+
+        div {
+                &:nth-child(odd) {
+                        >.list-group-item {
+                                background-color: var(--bg-color-2);
+                        }
+                }
         }
 }
 
@@ -115,8 +128,8 @@ a {
                 }
 
                 &::after {
-                        width: 30px;
-                        height: 30px;
+                        width: 27px;
+                        height: 27px;
                         margin: 0;
                         border-radius: 50%;
                         background-size: 15px;
@@ -214,7 +227,7 @@ div#swal2-html-container {
 }
 
 .formCategoryHeight {
-        height: 160px;
+        height: 72px;
         padding: 1rem;
 }
 

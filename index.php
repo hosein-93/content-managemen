@@ -9,24 +9,27 @@ include "./Module/connection.php";
 include "./Controller/Utility/Utility_CRUD.php";
 include "./Controller/CRUD/CRUD.php";
 include "./Controller/CRUD/CRUD_SELECT.php";
-include "./Controller/CRUD/CRUD_UPDATE.php";
-include "./Controller/CRUD/CRUD_INSERT.php";
-
 
 use Controller\Constant;
 use Controller\CRUD\CRUD_SELECT;
 
-$selectCategory = new CRUD_SELECT;
-$selectCategory->set_data();
-$sql = "SELECT * FROM {$selectCategory->get_table()} WHERE " . Constant::COLUMN["category"]["parent"] .  "='اصلی' ORDER BY " . Constant::COLUMN["name"] . " ASC";
-$selectCategory->set_sql($sql);
-$allMainCategory =  $selectCategory->SELECT();
+$allCategory = new CRUD_SELECT;
+$allCategory->set_data(["table"=>Constant::TABEL["category"]]);
+$sql_allCategory = "SELECT * FROM {$allCategory->get_table()} ORDER BY " . Constant::COLUMN["name"] . " ASC";
+$allCategory->set_sql($sql_allCategory);
+$allCategoryDetailes =  $allCategory->SELECT();
 
-$category_formSelectOption = "<option value='اصلی' selected>اصلی</option>";
-foreach ( $allMainCategory as $key => $value ): 
-        $category_formSelectOption .= "<option value='{$value["name"]}'>{$value["name"]}</option>";
-endforeach;
-// var_dump($allMainCategory);
+$allContent = new CRUD_SELECT;
+$allContent->set_data(["table"=>Constant::TABEL["site"]]);
+$sql_allContent = "SELECT * FROM {$allContent->get_table()} ORDER BY " . Constant::COLUMN["name"] . " ASC";
+$allContent->set_sql($sql_allContent);
+$allContentDetailes =  $allContent->SELECT();
+
+$allCategoryName = [];
+foreach ( $allCategoryDetailes as $key => $value ) {
+        $allCategoryName[$key] = $value["name"];
+}
+$allCategoryName = json_encode($allCategoryName);
 
 include "./View/home.php";
 

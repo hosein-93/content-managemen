@@ -19,7 +19,6 @@ $category =
         "CREATE TABLE " . Constant::SERVER["database"] . "." . Constant::TABEL["category"] . " (
                 " . Constant::COLUMN['id'] . " INT UNSIGNED AUTO_INCREMENT NOT NULL UNIQUE,
                 " . Constant::COLUMN['name'] . " VARCHAR(255) NOT NULL UNIQUE,
-                " . Constant::COLUMN['category']["parent"] . " VARCHAR(255) NOT NULL DEFAULT 'اصلی' ,
                 " . Constant::COLUMN['create'] . " DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL ,
                 " . Constant::COLUMN['update'] . " DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL , 
                 PRIMARY KEY (" . Constant::COLUMN['id'] . ")
@@ -29,7 +28,7 @@ $content =
         "CREATE TABLE " . Constant::SERVER["database"] . "." . Constant::TABEL["site"] . " (
                 " . Constant::COLUMN['id'] . " INT UNSIGNED AUTO_INCREMENT NOT NULL UNIQUE,
                 " . Constant::COLUMN['name'] . " VARCHAR(255) NOT NULL,
-                " . Constant::COLUMN['site']['cat_id'] . " INT UNSIGNED NOT NULL UNIQUE,
+                " . Constant::COLUMN['site']['cat_id'] . " INT UNSIGNED NOT NULL,
                 " . Constant::COLUMN['user'] . " VARCHAR(255) ,
                 " . Constant::COLUMN['pass'] . " VARCHAR(255),
                 " . Constant::COLUMN['description'] . " LONGTEXT,
