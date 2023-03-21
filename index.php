@@ -33,4 +33,3 @@ $allCategoryName = json_encode($allCategoryName);
 
 include "./View/home.php";
 
-

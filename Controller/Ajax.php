@@ -11,7 +11,7 @@ use Controller\Constant;
 
 parse_str($_REQUEST["data"], $formInformation);
 $allCategoryName = json_decode($_REQUEST["categoryNames"]);
-$ctegoryName = $_REQUEST["categoryName"];
+$categoryName = $_REQUEST["categoryName"];
 $targetId = $_REQUEST["targetId"];
 
 // if (empty($formInformation["Name"])) {
@@ -69,8 +69,8 @@ switch ($formInformation["form"]):
 
         case ("category-delete"):
                 // برسی آنکه آیا نام جدید انتخاب شده در دسته بندی های موجود در دیتابیس نباشد
-                if (!in_array($ctegoryName, $allCategoryName)) {
-                        echo ('دسته‌بندی ( ' . $ctegoryName . ' ) موجود نیست!');
+                if (!in_array($categoryName, $allCategoryName)) {
+                        echo ('دسته‌بندی ( ' . $categoryName . ' ) موجود نیست!');
                         return false;
                 }
                 // --------------------------------------------------------------------
@@ -97,8 +97,8 @@ switch ($formInformation["form"]):
 
         case "content-insert":
                 // برسی آنکه آیا نام جدید انتخاب شده در دسته بندی های موجود در دیتابیس نباشد
-                if (!in_array($ctegoryName, $allCategoryName)) {
-                        echo ('دسته‌بندی ( ' . $ctegoryName . ' ) موجود نیست!');
+                if (!in_array($categoryName, $allCategoryName)) {
+                        echo ('دسته‌بندی ( ' . $categoryName . ' ) موجود نیست!');
                         return false;
                 }
                 // --------------------------------------------------------------------
@@ -134,10 +134,19 @@ switch ($formInformation["form"]):
 
         case ("content-update"):
                 // برسی آنکه نام جدید انتخاب شده در محتواهای موجود در دسته‌بندی مشخص شده در دیتابیس نباشد
+
+                $getCategory = new Controller\CRUD\CRUD_SELECT;
+                $getCategory->set_data(["table" => Constant::TABEL["category"]]);
+                $sql_getCategory = "SELECT " . Constant::COLUMN["id"] . " FROM {$getCategory->get_table()} WHERE " . Constant::COLUMN["name"] . " =:name ";
+                $execute_getCategory = [":name" => htmlentities($categoryName)];
+                $getCategory->set_sql($sql_getCategory);
+                $getCategory->set_execute($execute_getCategory);
+                $getCategoryId =  $getCategory->SELECT()[0]["id"];
+
                 $checkContent = new Controller\CRUD\CRUD_SELECT;
                 $checkContent->set_data(["table" => Constant::TABEL["site"]]);
                 $check = "SELECT " . Constant::COLUMN["name"] . " FROM {$checkContent->get_table()} WHERE " . Constant::COLUMN["name"] . " =:name AND " . Constant::COLUMN["site"]["cat_id"] . "=:cat_id";
-                $execute = [":name" => htmlentities($formInformation["Name"]), ":cat_id" => $targetId];
+                $execute = [":name" => htmlentities($formInformation["Name"]), ":cat_id" => $getCategoryId];
                 $checkContent->set_sql($check);
                 $checkContent->set_execute($execute);
                 $allContent =  $checkContent->SELECT();
@@ -175,14 +184,14 @@ switch ($formInformation["form"]):
 
         case ("content-select"):
                 // برسی آنکه آیا نام جدید انتخاب شده در دسته بندی های موجود در دیتابیس نباشد
-                if (!in_array($ctegoryName, $allCategoryName) && $ctegoryName !== "all") {
-                        echo ('دسته‌بندی ( ' . $ctegoryName . ' ) موجود نیست!');
+                if (!in_array($categoryName, $allCategoryName) && $categoryName !== "all") {
+                        echo ('دسته‌بندی ( ' . $categoryName . ' ) موجود نیست!');
                         return false;
                 }
                 // --------------------------------------------------------------------
                 $allContent = new Controller\CRUD\CRUD_SELECT;
                 $allContent->set_data(["table" => Constant::TABEL["site"]]);
-                $sql_content = "SELECT * FROM {$allContent->get_table()} WHERE " . Constant::COLUMN["site"]["cat_id"] . "=:category";
+                $sql_content = "SELECT * FROM {$allContent->get_table()} WHERE " . Constant::COLUMN["site"]["cat_id"] . "=:category ORDER BY " . Constant::COLUMN["name"] . " ASC";
                 $allContent->set_execute([":category" => htmlentities($targetId)]);
                 if ($targetId === "0") {
                         $sql_content = "SELECT * FROM {$allContent->get_table()} ORDER BY " . Constant::COLUMN["name"] . " ASC";

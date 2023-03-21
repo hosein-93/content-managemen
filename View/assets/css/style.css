@@ -176,8 +176,8 @@ a.CP-icon {
   color: var(--bs-dark);
 }
 .accordion .accordion-button::after {
-  width: 27px;
-  height: 27px;
+  width: 29px;
+  height: 29px;
   margin: 0;
   border-radius: 50%;
   background-size: 15px;

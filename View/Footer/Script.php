@@ -48,10 +48,16 @@ use Controller\Constant;
                                         showConfirmButton: false,
                                         timer: 1000
                                 })
-                                $(document).on("click", function() {
-                                        location.reload();
-                                        window.location.replace("");
-                                });
+                                if (data === "1") {
+                                        $(document).on("click", function(event) {
+                                                $("body").fadeOut(500);
+                                                setTimeout(function() {
+                                                        location.reload();
+                                                        window.location.replace("");
+                                                        $("body").fadeIn(500);
+                                                }, 500)
+                                        });
+                                }
                         },
                         error: function(e) {
                                 console.log(e);
@@ -99,11 +105,16 @@ use Controller\Constant;
                                                         timer: 1000,
                                                         timerProgressBar: true
                                                 });
-                                                $(document).on("click", function() {
-                                                        location.reload();
-                                                        window.location.replace("");
-                                                });
-                                                $("#test").html(data);
+                                                if (data === "1") {
+                                                        $(document).on("click", function(event) {
+                                                                $("body").fadeOut(500);
+                                                                setTimeout(function() {
+                                                                        location.reload();
+                                                                        window.location.replace("");
+                                                                        $("body").fadeIn(500);
+                                                                }, 500)
+                                                        });
+                                                }
                                         }
                                 });
                         } else if (result.dismiss === Swal.DismissReason.cancel) {
@@ -141,25 +152,31 @@ use Controller\Constant;
                         success: function(data) {
                                 setTimeout(function() {
                                         $("#accordionContent").fadeOut(500);
-                                }, 1500);
+                                }, 1000);
                                 setTimeout(function() {
                                         $("#accordionContent lottie-player").addClass("d-none");
                                         $("#accordionContent").append(data);
                                         $("#accordionContent").fadeIn(500);
-                                }, 2000);
+                                }, 1500);
                         },
                         error: function(e) {
                                 console.log(e);
                         }
                 });
-                // اضافه کردن نام و شناسه دسته بندی به دکمه اضافه کردن محتوا
-                $('section[data-status="content"] button')[1].style.scale = 0;
-                $('section[data-status="content"] button')[1].setAttribute('data-status', "all");
-                $('section[data-status="content"] button')[1].setAttribute('data-id', "0");
-                if (event.dataset.status !== "all") {
-                        $('section[data-status="content"] button')[1].style.scale = 1;
+                // اضافه کردن نام و شناسه دسته‌بندی به دکمه اضافه کردن محتوا
+                setTimeout(function() {
+
+                }, 100)
+                $('section[data-status="content"] button')[1].setAttribute('aria-expanded', false);
+                $('section[data-status="content"] form').remove();
+                if (event.dataset.status !== "all" || event.dataset.id !== "0") {
                         $('section[data-status="content"] button')[1].setAttribute('data-status', event.dataset.status);
                         $('section[data-status="content"] button')[1].setAttribute('data-id', event.dataset.id);
+                        $('section[data-status="content"] button')[1].setAttribute('onclick', "content_add(this)");
+                } else {
+                        $('section[data-status="content"] button').removeAttr('data-status');
+                        $('section[data-status="content"] button').removeAttr('data-id');
+                        $('section[data-status="content"] button').removeAttr('onclick');
                 }
         }
 
@@ -203,10 +220,16 @@ use Controller\Constant;
                                                         timer: 1000,
                                                         timerProgressBar: true
                                                 });
-                                                $(document).on("click", function() {
-                                                        location.reload();
-                                                        window.location.replace("");
-                                                });
+                                                if (data === "1") {
+                                                        $(document).on("click", function(event) {
+                                                                $("body").fadeOut(500);
+                                                                setTimeout(function() {
+                                                                        location.reload();
+                                                                        window.location.replace("");
+                                                                        $("body").fadeIn(500);
+                                                                }, 500)
+                                                        });
+                                                }
                                         }
                                 });
                         } else if (result.dismiss === Swal.DismissReason.cancel) {
