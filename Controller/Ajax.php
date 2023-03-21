@@ -1,7 +1,6 @@
 <?php
 
 include './Constant.php';
-include "./Function.php";
 include '../autoLoader.php';
 include "../Module/connection.php";
 include './Utility/Utility_CRUD.php';
