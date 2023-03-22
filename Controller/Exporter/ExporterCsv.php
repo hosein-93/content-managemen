@@ -11,17 +11,18 @@ final class ExporterCsv extends Exporter
                 $className = str_replace(__NAMESPACE__ . "\\", "", __CLASS__);
                 $filePath =  $this->folderPath . "{$className}.csv";
                 $content = '';
-                $content .= "category name , create category , update category , content name , content username , content password , content description , content create , content update \n";
+                $content .= "category name , create category , update category , , content name , content username , content password , content description , content create , content update \n";
                 foreach ($this->data as $Ckey => $Cvalue) {
+                        $content .= "\n";
                         foreach ($Cvalue as $key => $value) {
                                 if (is_array($value)) {
                                         $name = empty($value["name"]) ? "---" : $value["name"];
                                         $user = empty($value["user"]) ? "---" : $value["user"];
                                         $pass = empty($value["pass"]) ? "---" : $value["pass"];
-                                        $des = empty($value["description"]) ? "---" : $value["description"];
+                                        $des = empty($value["description"]) ? "---" : nl2br($value["description"]);
                                         $create = empty($value["create"]) ? "---" : $value["create"];
                                         $update = empty($value["update"]) ? "---" : $value["update"];
-                                        $content .= "{$Ckey} , {$Cvalue["create"]} , {$Cvalue["update"]} , {$name} , {$user} , {$pass} , {$des} , {$create} , {$update} \n";
+                                        $content .= "{$Ckey} , {$Cvalue["create"]} , {$Cvalue["update"]} , , {$name} , {$user} , {$pass} , {$des} , {$create} , {$update} \n";
                                 }
                         }
                 }
