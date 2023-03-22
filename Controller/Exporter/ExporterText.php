@@ -12,15 +12,15 @@ final class ExporterText extends Exporter
                 $filePath =  $this->folderPath . "{$className}.txt";
                 $content = '';
                 foreach ($this->data as $Ckey => $Cvalue) {
-                        $content .= "\n\ncategory name : {$Ckey} \t create : {$Cvalue["create"]} \t update: {$Cvalue["update"]}\n";
+                        $content .= "\n\ncategory name : {$Ckey} \t create : {$Cvalue["create"]} " . " (" . verta($Cvalue["create"]) . ")" . " \t update: {$Cvalue["update"]}\n " . " (" . verta($Cvalue["update"]) . ")";
                         foreach ($Cvalue as $key => $value) {
                                 if (is_array($value)) {
                                         $name = empty($value["name"]) ? "---" : $value["name"];
                                         $user = empty($value["user"]) ? "---" : $value["user"];
                                         $pass = empty($value["pass"]) ? "---" : $value["pass"];
                                         $des = empty($value["description"]) ? "---" : $value["description"];
-                                        $create = empty($value["create"]) ? "---" : $value["create"];
-                                        $update = empty($value["update"]) ? "---" : $value["update"];
+                                        $create = empty($value["create"]) ? "---" : $value["create"] . " (" . verta($value["create"]) . ")";
+                                        $update = empty($value["update"]) ? "---" : $value["update"] . " (" . verta($value["update"]) . ")";
                                         $content .= "name : {$name} \t username : {$user} \t password : {$pass} \t description : {$des} \t create : {$create} \t update : {$update} \n";
                                 }
                         }

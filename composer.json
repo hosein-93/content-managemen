@@ -1,0 +1,23 @@
+{
+    "name": "management/content",
+    "description": "description content management",
+    "type": "project",
+    "require": {
+        "firebase/php-jwt": "^6.4",
+        "morilog/jalali": "^3.4",
+        "hekmatinasser/verta": "^8.3"
+    },
+    "license": "as",
+    "autoload": {
+        "psr-4": {
+            "Management\\Content\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "hosein-93",
+            "email": "ab.hosein93@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}

@@ -1,5 +1,7 @@
 <?php
 
+include "../vendor/autoload.php";
+
 include './Constant.php';
 include '../autoLoader.php';
 include "../Module/connection.php";
@@ -42,12 +44,14 @@ foreach ($allCategoryDetailes as $Ckey => $Cvalue) :
         }
 endforeach;
 
-include "./Exporter/Exporter" . $formInformation['Type'] . ".php";
 
+include "./Exporter/Exporter" . $formInformation['Type'] . ".php";
 $className = 'Controller\Exporter\Exporter' . $formInformation['Type'];
 if (class_exists($className)) {
         $createFile = new $className;
         $createFile->set_data($result);
         $createFile->export();
 }
-// var_dump($createFile->get_data());
+
+
+// var_dump($createFile->export());

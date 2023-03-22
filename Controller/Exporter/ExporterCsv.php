@@ -16,13 +16,15 @@ final class ExporterCsv extends Exporter
                         $content .= "\n";
                         foreach ($Cvalue as $key => $value) {
                                 if (is_array($value)) {
+                                        $C_create = $Cvalue["create"] . " (" . verta($Cvalue["create"]) .")";
+                                        $C_update = $Cvalue["update"] . " (" . verta($Cvalue["update"]) .")";
                                         $name = empty($value["name"]) ? "---" : $value["name"];
                                         $user = empty($value["user"]) ? "---" : $value["user"];
                                         $pass = empty($value["pass"]) ? "---" : $value["pass"];
                                         $des = empty($value["description"]) ? "---" : nl2br($value["description"]);
-                                        $create = empty($value["create"]) ? "---" : $value["create"];
-                                        $update = empty($value["update"]) ? "---" : $value["update"];
-                                        $content .= "{$Ckey} , {$Cvalue["create"]} , {$Cvalue["update"]} , , {$name} , {$user} , {$pass} , {$des} , {$create} , {$update} \n";
+                                        $create = empty($value["create"]) ? "---" : $value["create"] . " (" . verta($value["create"]) .")";
+                                        $update = empty($value["update"]) ? "---" : $value["update"] . " (" . verta($value["update"]) .")";
+                                        $content .= "{$Ckey} , {$C_create} , {$C_update} , , {$name} , {$user} , {$pass} , {$des} , {$create} , {$update} \n";
                                 }
                         }
                 }

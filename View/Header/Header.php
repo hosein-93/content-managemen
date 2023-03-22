@@ -1,7 +1,3 @@
-<?php
-
-?>
-
 <header class="bg-dark" style="height:100px;">
         <section class="container h-100">
                 <div class="row justify-content-center align-items-center h-100">
