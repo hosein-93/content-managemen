@@ -12,7 +12,7 @@ final class ExporterText extends Exporter
                 $filePath =  $this->folderPath . "{$className}.txt";
                 $content = '';
                 foreach ($this->data as $Ckey => $Cvalue) {
-                        $content .= "\n\ncategory name : {$Ckey} \t create : {$Cvalue["create"]} " . " (" . verta($Cvalue["create"]) . ")" . " \t update: {$Cvalue["update"]}\n " . " (" . verta($Cvalue["update"]) . ")";
+                        $content .= "category name : {$Ckey} \t create : {$Cvalue["create"]} " . " (" . verta($Cvalue["create"]) . ")" . " \t update: {$Cvalue["update"]} " . " (" . verta($Cvalue["update"]) . ") \n";
                         foreach ($Cvalue as $key => $value) {
                                 if (is_array($value)) {
                                         $name = empty($value["name"]) ? "---" : $value["name"];
@@ -24,9 +24,12 @@ final class ExporterText extends Exporter
                                         $content .= "name : {$name} \t username : {$user} \t password : {$pass} \t description : {$des} \t create : {$create} \t update : {$update} \n";
                                 }
                         }
+                        $content .= "\n\n";
                 }
                 is_dir($this->folderPath) ? true : mkdir($this->folderPath, 0777, false);
                 file_put_contents($filePath, $content . PHP_EOL, FILE_USE_INCLUDE_PATH);
                 // file_put_contents($filePath, $content . PHP_EOL, FILE_APPEND);
+
+                $this->downloaded($filePath);   // دانلود فایل ایجاد شده به وسیله پنجره ذخیره فایل
         }
 }

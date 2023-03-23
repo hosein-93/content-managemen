@@ -12,7 +12,9 @@ include "./CRUD/CRUD_SELECT.php";
 use Controller\Constant;
 use Controller\CRUD\CRUD_SELECT;
 
-parse_str($_REQUEST["data"], $formInformation);
+$formInformation = $_POST;
+$formInformation["form"] = "Exporter";
+// parse_str($_REQUEST["data"], $formInformation);
 
 if ($formInformation["form"] !== "Exporter") {
         echo "نام فرم دستکاری شده است!";
@@ -52,6 +54,3 @@ if (class_exists($className)) {
         $createFile->set_data($result);
         $createFile->export();
 }
-
-
-// var_dump($createFile->export());

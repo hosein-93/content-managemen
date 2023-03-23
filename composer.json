@@ -5,7 +5,8 @@
     "require": {
         "firebase/php-jwt": "^6.4",
         "morilog/jalali": "^3.4",
-        "hekmatinasser/verta": "^8.3"
+        "hekmatinasser/verta": "^8.3",
+        "tecnickcom/tcpdf": "^6.6"
     },
     "license": "as",
     "autoload": {

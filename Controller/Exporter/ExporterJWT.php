@@ -23,10 +23,12 @@ final class ExporterJWT extends Exporter
                 $jwt = JWT::encode($payload, $key, 'HS256');
                 // $decoded = JWT::decode($jwt, new Key($key, 'HS256'));
                 $className = str_replace(__NAMESPACE__ . "\\", "", __CLASS__);
-                $filePath =  $this->folderPath . "{$className}.json";
+                $filePath =  $this->folderPath . "{$className}.txt";
                 $content = "key=Create JWT Content \t algoritme=HS256\n{$jwt}";
                 is_dir($this->folderPath) ? true : mkdir($this->folderPath, 0777, false);
                 file_put_contents($filePath, $content . PHP_EOL, FILE_USE_INCLUDE_PATH);
                 // file_put_contents($filePath, $content . PHP_EOL, FILE_APPEND);
+
+                $this->downloaded($filePath);   // دانلود فایل ایجاد شده به وسیله پنجره ذخیره فایل
         }
 }
