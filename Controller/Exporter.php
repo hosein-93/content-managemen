@@ -1,5 +1,7 @@
 <?php
 
+include "../vendor/autoload.php";
+
 include './Constant.php';
 include '../autoLoader.php';
 include "../Module/connection.php";
@@ -10,7 +12,9 @@ include "./CRUD/CRUD_SELECT.php";
 use Controller\Constant;
 use Controller\CRUD\CRUD_SELECT;
 
-parse_str($_REQUEST["data"], $formInformation);
+$formInformation = $_POST;
+$formInformation["form"] = "Exporter";
+// parse_str($_REQUEST["data"], $formInformation);
 
 if ($formInformation["form"] !== "Exporter") {
         echo "نام فرم دستکاری شده است!";
@@ -42,12 +46,11 @@ foreach ($allCategoryDetailes as $Ckey => $Cvalue) :
         }
 endforeach;
 
-include "./Exporter/Exporter" . $formInformation['Type'] . ".php";
 
+include "./Exporter/Exporter" . $formInformation['Type'] . ".php";
 $className = 'Controller\Exporter\Exporter' . $formInformation['Type'];
 if (class_exists($className)) {
         $createFile = new $className;
         $createFile->set_data($result);
         $createFile->export();
 }
-// var_dump($createFile->get_data());

@@ -14,5 +14,7 @@ final class ExporterJson extends Exporter
                 is_dir($this->folderPath) ? true : mkdir($this->folderPath, 0777, false);
                 file_put_contents($filePath, $content . PHP_EOL, FILE_USE_INCLUDE_PATH);
                 // file_put_contents($filePath, $content . PHP_EOL, FILE_APPEND);
+
+                $this->downloaded($filePath);   // دانلود فایل ایجاد شده به وسیله پنجره ذخیره فایل
         }
 }

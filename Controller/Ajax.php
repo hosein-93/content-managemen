@@ -95,6 +95,13 @@ switch ($formInformation["form"]):
                 break;
 
         case "content-insert":
+                // بررسی آنکه نام وارد شده یک آدرس اینترنتی باشد
+                $pattern = "/((http|ftp|https):\/\/){0,1}([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])/";
+                preg_match_all($pattern, $formInformation["Name"], $matches, PREG_PATTERN_ORDER);
+                if (empty($matches[0])) {
+                        echo "نام سایت یک آدرس اینترنتی نیست!";
+                        die();
+                }
                 // برسی آنکه آیا نام جدید انتخاب شده در دسته بندی های موجود در دیتابیس نباشد
                 if (!in_array($categoryName, $allCategoryName)) {
                         echo ('دسته‌بندی ( ' . $categoryName . ' ) موجود نیست!');
@@ -132,8 +139,14 @@ switch ($formInformation["form"]):
                 break;
 
         case ("content-update"):
+                // بررسی آنکه نام وارد شده یک آدرس اینترنتی باشد
+                $pattern = "/((http|ftp|https):\/\/){0,1}([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])/";
+                preg_match_all($pattern, $formInformation["Name"], $matches, PREG_PATTERN_ORDER);
+                if (empty($matches[0])) {
+                        echo "نام سایت یک آدرس اینترنتی نیست!";
+                        die();
+                }
                 // برسی آنکه نام جدید انتخاب شده در محتواهای موجود در دسته‌بندی مشخص شده در دیتابیس نباشد
-
                 $getCategory = new Controller\CRUD\CRUD_SELECT;
                 $getCategory->set_data(["table" => Constant::TABEL["category"]]);
                 $sql_getCategory = "SELECT " . Constant::COLUMN["id"] . " FROM {$getCategory->get_table()} WHERE " . Constant::COLUMN["name"] . " =:name ";

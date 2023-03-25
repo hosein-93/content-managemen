@@ -17,4 +17,5 @@ class Constant
         const FORM = ["status", "form", "Name", "Parent", "Number", "Submit", "Category", "UserName", "Password", "Description"];
         const JWT_VALUES = ['key' => 'site management', 'algorithm' => 'HS256'];
         const RESOURCE = ['folder' => 'CrawlerResult'];
+        const EXPORTER_FILE = "ExporterFile/";
 }
