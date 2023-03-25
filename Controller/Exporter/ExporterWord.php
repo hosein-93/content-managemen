@@ -11,7 +11,6 @@ final class ExporterWord extends Exporter
 {
         public function export()
         {
- 
                 $content[0] = "Content Management with phpoffice/phpword";
                 foreach ($this->data as $Ckey => $Cvalue) :
                         $content[$Ckey] =[];
@@ -34,13 +33,10 @@ final class ExporterWord extends Exporter
                                         $content[$Ckey][$key]["update"] = "update : {$update}";
                                 endif;
                         endforeach;
-                        // $content[$Ckey] = array_values($content[$Ckey]);
                 endforeach;
-
+                
                 is_dir($this->folderPath) ? true : mkdir($this->folderPath, 0777, false);
-
                 $_SESSION["ExporterWord"] = $content;
-                // $_SESSION["ExporterWord"] = $this->data;
                 header("location: phpword.php");
         }
 }
