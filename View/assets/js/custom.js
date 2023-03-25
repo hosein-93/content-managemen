@@ -29,6 +29,29 @@ Array.prototype.slice.call(forms)
 // ================================================================
 // ================================================================
 
+function reloadDocument(reload = 500, timeout = 1000) {
+        $(document).on("click", function (event) {
+                $("body").fadeOut(500);
+                setTimeout(function () {
+                        location.reload();
+                        window.location.replace("");
+                        $("body").fadeIn(500);
+                }, reload)
+        });
+        setTimeout(function () {
+                $("body").fadeOut(500);
+                setTimeout(function () {
+                        location.reload();
+                        window.location.replace("");
+                        $("body").fadeIn(500);
+                }, 500)
+        }, timeout)
+}
+
+// ================================================================
+// ================================================================
+// ================================================================
+
 // اضافه کردن تگ جستوجوی دسته‌دسته‌بندی و محتوا به سند
 function showSearchTag(event) {
         let parent = event.closest("section");
@@ -101,7 +124,7 @@ function category_add(event) {
                                         </span> \
                                 </div>\
                                 <button type="submit" name="Submit" class="btn bg-white border border-1 d-block text-success py-2 ms-2 shadow-none">افزودن</button>';
-        let formAttribute = { "action": "#", "method": "POST", "name": "category-insert", "class": "d-flex align-items-center w-100 rounded-3 shadow-sm needs-validation tagHide", "data-status": "insert", "data-id":"0", "onsubmit": "form_submit(event);", "novalidate": "" };
+        let formAttribute = { "action": "#", "method": "POST", "name": "category-insert", "class": "d-flex align-items-center w-100 rounded-3 shadow-sm needs-validation tagHide", "data-status": "insert", "data-id": "0", "onsubmit": "form_submit(event);", "novalidate": "" };
         let form = document.createElement("form");
         for (var key in formAttribute) {
                 form.setAttribute(key, formAttribute[key]);
@@ -129,6 +152,8 @@ function category_add(event) {
         if (event.getAttribute("aria-expanded") === "false") {
                 return false;
         }
+
+
 }
 
 // ================================================================
@@ -145,7 +170,7 @@ function category_update(event) {
                                         </span> \
                                 </div>\
                                 <button type="submit" name="Submit" class="btn bg-white border border-1 d-block text-success py-2 ms-2 shadow-none">ویرایش</button>';
-        let formAttribute = { "action": "#", "method": "POST", "name": "category-update", "class": "d-flex align-items-center w-100 rounded-3 shadow-sm needs-validation tagHide", "data-status": event.dataset.status, "data-id":event.dataset.id, "onsubmit": "form_submit(event);", "novalidate": "" };
+        let formAttribute = { "action": "#", "method": "POST", "name": "category-update", "class": "d-flex align-items-center w-100 rounded-3 shadow-sm needs-validation tagHide", "data-status": event.dataset.status, "data-id": event.dataset.id, "onsubmit": "form_submit(event);", "novalidate": "" };
         let form = document.createElement("form");
         for (var key in formAttribute) {
                 form.setAttribute(key, formAttribute[key]);
@@ -196,7 +221,7 @@ function content_add(event) {
                                         </div> \
                                 </div> \
                                 <button type="submit" name="Submit" class="btn bg-white border border-1 d-block text-success mt-2 ms-auto shadow-none">افزودن</button>';
-        let formAttribute = { "action": "#", "method": "POST", "name": "content-insert", "class": "w-100 rounded-3 shadow-sm validation tagHide", "data-status": event.dataset.status, "data-id":event.dataset.id, "onsubmit": "form_submit(event);", "novalidate": "" };
+        let formAttribute = { "action": "#", "method": "POST", "name": "content-insert", "class": "w-100 rounded-3 shadow-sm validation tagHide", "data-status": event.dataset.status, "data-id": event.dataset.id, "onsubmit": "form_submit(event);", "novalidate": "" };
         let form = document.createElement("form");
         for (var key in formAttribute) {
                 form.setAttribute(key, formAttribute[key]);
@@ -252,9 +277,9 @@ function content_update(event) {
                                                 <textarea placeholder="توضیحات اضافه ... " name="Description" cols="" rows="4" class="form-control shadow-none rounded-3" dir="rtl">' + categoryParent.querySelector('[data-content="description"]').innerText + '</textarea> \
                                         </div> \
                                 </div> \
-                                <input type="radio" name="NameOld" value="' + categoryParent.querySelector('[data-content="name"]').innerText +'" class="d-none" checked> \
+                                <input type="radio" name="NameOld" value="' + categoryParent.querySelector('[data-content="name"]').innerText + '" class="d-none" checked> \
                                 <button type="submit" name="Submit" class="btn bg-white border border-1 d-block text-success mt-2 ms-auto shadow-none">ویرایش</button>';
-        let formAttribute = { "action": "#", "method": "POST", "name": "content-update", "class": "w-100 rounded-3 shadow-sm validation tagHide", "data-status": event.dataset.status, "data-id":event.dataset.id, "onsubmit": "form_submit(event);", "novalidate": "" };
+        let formAttribute = { "action": "#", "method": "POST", "name": "content-update", "class": "w-100 rounded-3 shadow-sm validation tagHide", "data-status": event.dataset.status, "data-id": event.dataset.id, "onsubmit": "form_submit(event);", "novalidate": "" };
         let form = document.createElement("form");
         for (var key in formAttribute) {
                 form.setAttribute(key, formAttribute[key]);

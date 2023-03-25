@@ -13,6 +13,7 @@ use Controller\Constant;
         function form_submit(event) {
                 // event.stopPropagation();
                 event.preventDefault();
+
                 if (event.target[0].value === '') {
                         Swal.fire({
                                 position: 'center-top',
@@ -49,14 +50,7 @@ use Controller\Constant;
                                         timer: 1000
                                 })
                                 if (data === "1") {
-                                        $(document).on("click", function(event) {
-                                                $("body").fadeOut(500);
-                                                setTimeout(function() {
-                                                        location.reload();
-                                                        window.location.replace("");
-                                                        $("body").fadeIn(500);
-                                                }, 500)
-                                        });
+                                        reloadDocument();
                                 }
                         },
                         error: function(e) {
@@ -106,14 +100,7 @@ use Controller\Constant;
                                                         timerProgressBar: true
                                                 });
                                                 if (data === "1") {
-                                                        $(document).on("click", function(event) {
-                                                                $("body").fadeOut(500);
-                                                                setTimeout(function() {
-                                                                        location.reload();
-                                                                        window.location.replace("");
-                                                                        $("body").fadeIn(500);
-                                                                }, 500)
-                                                        });
+                                                        reloadDocument();
                                                 }
                                         }
                                 });
@@ -180,6 +167,7 @@ use Controller\Constant;
                 }
         }
 
+
         function content_delete(event) {
                 let contentName = event.closest(".accordion-body").querySelector("a").innerText;
                 Swal.fire({
@@ -221,14 +209,7 @@ use Controller\Constant;
                                                         timerProgressBar: true
                                                 });
                                                 if (data === "1") {
-                                                        $(document).on("click", function(event) {
-                                                                $("body").fadeOut(500);
-                                                                setTimeout(function() {
-                                                                        location.reload();
-                                                                        window.location.replace("");
-                                                                        $("body").fadeIn(500);
-                                                                }, 500)
-                                                        });
+                                                        reloadDocument();
                                                 }
                                         }
                                 });
