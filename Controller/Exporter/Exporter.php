@@ -12,8 +12,8 @@ interface Exportebale
 abstract class Exporter implements Exportebale
 {
         protected $data;
-        protected $folderPath = Constant::URL_PATH . '/ExporterFile/';
-        protected $fileUrl = Constant::URL . "/ExporterFile/";
+        protected $folderPath = Constant::URL_PATH . '/' . Constant::EXPORTER_FILE . '/';
+        protected $fileUrl = Constant::URL . '/' . Constant::EXPORTER_FILE . '/';
 
         public function set_data($data)
         {
