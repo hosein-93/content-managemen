@@ -1,9 +1,0 @@
-document
-font
-img
-/ExporterFile/
-/vendor/
-
-
-*.map
-composer.lock
